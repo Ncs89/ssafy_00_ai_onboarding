@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03_BOOK // C.E</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.tailwindcss.com/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ce: {
+              black: '#030304',
+              gray: '#121214',
+              pink: '#ff0055',
+              cyan: '#00f0ff'
+            },
+            midnight: {
+              DEFAULT: '#09090b',
+              darker: '#030304',
+              card: '#121214',
+              border: '#27272a'
+            },
+            accent: {
+              pink: '#ff0055',
+              cyan: '#00f0ff',
+              glow: 'rgba(255, 0, 85, 0.15)'
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="reading" class="bg-ce-black text-zinc-200 overflow-x-hidden font-sans antialiased selection:bg-accent-pink selection:text-white">
+  <div class="fixed inset-0 z-[9999] pointer-events-none opacity-40 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px]"></div>
+
+  <header class="sticky top-0 z-50 border-b-4 border-black bg-midnight-card px-6 py-5 shadow-[4px_4px_0px_#000000]">
+    <div class="max-w-7xl mx-auto flex flex-col gap-4">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <div class="bg-accent-pink text-midnight-darker text-[9px] font-mono px-2 py-0.5 font-bold tracking-wider">COLLAPSE_PREVENTION_SYSTEM</div>
+            <span class="font-mono text-[10px] text-zinc-500 font-bold">RE_v4.2.1-CE</span>
+          </div>
+          <h1 class="font-mono text-3xl md:text-4xl tracking-wider text-white font-extrabold mt-1 uppercase">CHANSOL'S READING</h1>
+          <p class="text-sm text-gray-400 mt-2 font-semibold">
+            책장에 남은 문장과 메모의 기록
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-[10px] font-mono">
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            STATUS: <span class="text-accent-cyan">ARCHIVE_SYNCED</span>
+          </div>
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            SYS_TIME: <span id="digital-clock" class="text-accent-pink">00:00:00</span>
+          </div>
+          <button id="crt-toggle" class="flex items-center gap-1.5 border-2 border-zinc-800 bg-zinc-900 px-3 py-1.5 font-bold text-white shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-zinc-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+            <i data-lucide="monitor" class="w-3.5 h-3.5 text-accent-pink"></i>
+            CRT_MODE
+          </button>
+        </div>
+      </div>
+
+      <nav class="bg-black/95 backdrop-blur-md border-2 border-black px-4 py-2">
+        <div class="max-w-7xl mx-auto flex justify-center gap-3 md:gap-8 text-[10px] md:text-xs font-mono">
+          <a href="game.html" data-nav-link="game" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[01_GAME]</span>
+          </a>
+          <a href="music.html" data-nav-link="music" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[02_MUSIC]</span>
+          </a>
+          <a href="reading.html" data-nav-link="reading" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[03_BOOK]</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl w-full mx-auto p-4 md:p-6 my-6">
+    <section id="section-reading" class="relative flex flex-col rounded-none border-2 border-black bg-midnight-card p-5 shadow-[4px_4px_0px_#000000] scroll-mt-36 md:p-6">
+      <div class="absolute top-1 left-1 text-[9px] text-zinc-700 font-bold">[┌]</div>
+      <div class="absolute top-1 right-1 text-[9px] text-zinc-700 font-bold">[┐]</div>
+      <div class="absolute bottom-1 left-1 text-[9px] text-zinc-700 font-bold">[└]</div>
+      <div class="absolute bottom-1 right-1 text-[9px] text-zinc-700 font-bold">[┘]</div>
+
+      <div class="-mx-5 -mt-5 mb-5 flex items-center justify-between border-b-2 border-black bg-[repeating-linear-gradient(45deg,#121214,#121214_10px,#1c1c1f_10px,#1c1c1f_20px)] px-5 py-4 md:-mx-6 md:-mt-6 md:px-6">
+        <div class="flex items-center gap-2">
+          <i data-lucide="book-open" class="w-5 h-5 text-accent-pink"></i>
+          <span class="font-mono font-extrabold text-white tracking-tight flex items-center gap-2">
+            03 // READING LOG
+            <span class="text-[10px] text-zinc-400 font-bold border border-accent-pink/40 px-1.5 py-0.5 bg-black">SINCE 2005</span>
+          </span>
+        </div>
+        <span class="text-[10px] font-mono text-accent-pink font-bold bg-black border border-accent-pink px-2.5 py-0.5">SYS_PARAM: 0x99_BOOK</span>
+      </div>
+
+      <div class="space-y-6 text-sm flex flex-col">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="book-logs-container">
+          <div class="bg-black border-2 border-midnight-border p-4 flex gap-4 hover:border-accent-pink/50 transition duration-150">
+            <div class="w-16 h-24 md:w-20 md:h-28 rounded-none border border-zinc-700 bg-zinc-950 flex-shrink-0 p-0.5">
+              <img src="https://covers.openlibrary.org/b/isbn/9780198788607-L.jpg" alt="이기적 유전자 표지" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=150&auto=format&fit=crop&q=60'">
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <div class="flex justify-between items-start gap-1">
+                  <div>
+                    <span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded-none mb-1 font-bold">지적 호기심 (Completed)</span>
+                    <h4 class="text-sm font-extrabold text-white leading-tight">이기적 유전자</h4>
+                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">저자: 리처드 도킨스</p>
+                  </div>
+                  <span class="font-mono text-xs text-accent-pink font-bold flex-shrink-0">★ 4.8</span>
+                </div>
+                <div class="mt-2 border-t border-midnight-border pt-2 text-xs">
+                  <p class="text-zinc-300 italic leading-relaxed">
+                    "우리가 유전자의 보존을 위해 프로그래밍된 생존 기계에 불과할지라도, 본능을 인지하고 거스르는 인간 행동의 숭고함을 고찰하게 만든다."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-black border-2 border-midnight-border p-4 flex gap-4 hover:border-accent-pink/50 transition duration-150">
+            <div class="w-16 h-24 md:w-20 md:h-28 rounded-none border border-zinc-700 bg-zinc-950 flex-shrink-0 p-0.5">
+              <img src="https://covers.openlibrary.org/b/isbn/9782226474131-L.jpg" alt="퀸의 대각선 표지" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=150&auto=format&fit=crop&q=60'">
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <div class="flex justify-between items-start gap-1">
+                  <div>
+                    <span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-accent-pink/10 text-accent-pink border border-accent-pink/20 rounded-none mb-1 font-bold">두뇌 전쟁 (Completed)</span>
+                    <h4 class="text-sm font-extrabold text-white leading-tight">퀸의 대각선</h4>
+                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">저자: 베르나르 베르베르</p>
+                  </div>
+                  <span class="font-mono text-xs text-accent-pink font-bold flex-shrink-0">★ 4.5</span>
+                </div>
+                <div class="mt-2 border-t border-midnight-border pt-2 text-xs">
+                  <p class="text-zinc-300 italic leading-relaxed">
+                    "체스판 위의 대국처럼 한 수 한 수 얽혀 들어가는 천재들의 긴장감 넘치는 지적 싸움과 숨 막히는 서사 구조가 강렬하다."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-black border-2 border-midnight-border p-4 flex gap-4 hover:border-accent-pink/50 transition duration-150">
+            <div class="w-16 h-24 md:w-20 md:h-28 rounded-none border border-zinc-700 bg-zinc-950 flex-shrink-0 p-0.5">
+              <img src="https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg" alt="연금술사 표지" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=150&auto=format&fit=crop&q=60'">
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <div class="flex justify-between items-start gap-1">
+                  <div>
+                    <span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-accent-pink/10 text-accent-pink border border-accent-pink/20 rounded-none mb-1 font-bold">여정 (Completed)</span>
+                    <h4 class="text-sm font-extrabold text-white leading-tight">연금술사</h4>
+                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">저자: 파울로 코엘료</p>
+                  </div>
+                  <span class="font-mono text-xs text-accent-pink font-bold flex-shrink-0">★ 4.7</span>
+                </div>
+                <div class="mt-2 border-t border-midnight-border pt-2 text-xs">
+                  <p class="text-zinc-300 italic leading-relaxed">
+                    "자신의 표지를 지키고 꿈을 향해 걷다 보면, 온 세상이 그것을 돕는다는 영혼을 울리는 따뜻하고 신비로운 위로의 고전."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-black border-2 border-midnight-border p-4 flex gap-4 hover:border-accent-pink/50 transition duration-150">
+            <div class="w-16 h-24 md:w-20 md:h-28 rounded-none border border-zinc-700 bg-zinc-950 flex-shrink-0 p-0.5">
+              <img src="https://covers.openlibrary.org/b/isbn/9780142410318-L.jpg" alt="찰리와 초콜릿 공장 표지" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=150&auto=format&fit=crop&q=60'">
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <div class="flex justify-between items-start gap-1">
+                  <div>
+                    <span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-accent-pink/10 text-accent-pink border border-accent-pink/20 rounded-none mb-1 font-bold">상상력 (Completed)</span>
+                    <h4 class="text-sm font-extrabold text-white leading-tight">찰리와 초콜릿 공장</h4>
+                    <p class="text-[11px] text-zinc-500 font-mono mt-0.5">저자: 로알드 달</p>
+                  </div>
+                  <span class="font-mono text-xs text-accent-pink font-bold flex-shrink-0">★ 4.3</span>
+                </div>
+                <div class="mt-2 border-t border-midnight-border pt-2 text-xs">
+                  <p class="text-zinc-300 italic leading-relaxed">
+                    "어릴 때의 순수한 설렘을 되살려주는 마법 같은 초콜릿 강물, 기묘하고 환상적인 웡카의 초콜릿 팩토리 모험기."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-black border-2 border-midnight-border p-4 space-y-3 mt-3">
+          <span class="font-mono text-xs text-accent-pink uppercase font-bold block">&gt; DATABASE_WRITE_CONSOLE</span>
+          <div class="space-y-2">
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" id="book-title-input" placeholder="책 제목" class="bg-midnight-card border-2 border-midnight-border text-xs rounded-none p-2.5 text-gray-300 focus:outline-none focus:border-accent-pink transition">
+              <input type="text" id="book-author-input" placeholder="저자" class="bg-midnight-card border-2 border-midnight-border text-xs rounded-none p-2.5 text-gray-300 focus:outline-none focus:border-accent-pink transition">
+            </div>
+            <input type="text" id="book-review-input" placeholder="솔직 담백한 나의 한 줄 평" class="w-full bg-midnight-card border-2 border-midnight-border text-xs rounded-none p-2.5 text-gray-300 focus:outline-none focus:border-accent-pink transition">
+            <div class="flex justify-between items-center pt-2 gap-3">
+              <div class="flex gap-2">
+                <button type="button" id="status-btn-reading" class="border-2 border-zinc-800 bg-zinc-800 px-3 py-1.5 text-[10px] font-bold font-mono text-gray-200 shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">읽는 중</button>
+                <button type="button" id="status-btn-completed" class="border-2 border-midnight-border bg-black px-3 py-1.5 text-[10px] font-bold font-mono text-zinc-500 shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">완독</button>
+              </div>
+              <button id="btn-add-book" class="border-2 border-[#ff0055] bg-accent-pink px-4 py-2 text-xs font-extrabold text-black shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+                WRITE_RECORD
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t-4 border-black bg-midnight-card px-6 py-4 font-mono text-xs text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span>MEM_USAGE: <span class="text-accent-pink font-bold">38.9MB / 512MB</span></span>
+        <span class="hidden md:inline">|</span>
+        <span class="hidden md:inline">SYSTEM: <span class="text-accent-cyan font-bold">COLLAPSE_STABLE_v1</span></span>
+      </div>
+      <div>
+        <p>&copy; 2026. MY PERSONAL ARCHIVE. <span class="animate-[blink_1s_infinite] text-accent-pink font-bold">_</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed bottom-10 right-6 z-[10000] flex max-w-sm translate-y-10 transform items-center gap-3 border-2 border-accent-pink bg-midnight-card px-5 py-4 font-mono text-xs text-white opacity-0 shadow-[4px_4px_0px_#000000] pointer-events-none transition-all duration-300">
+    <span class="bg-accent-pink text-white px-1.5 py-0.5 font-bold">ERROR</span>
+    <span id="toast-message">알림 메시지</span>
+  </div>
+
+  <script src="assets/site.js"></script>
+  <script>
+    let currentNewBookStatus = 'reading';
+    const readingBtn = document.getElementById('status-btn-reading');
+    const completedBtn = document.getElementById('status-btn-completed');
+
+    readingBtn.addEventListener('click', () => {
+      currentNewBookStatus = 'reading';
+      readingBtn.className = 'border-2 border-zinc-800 bg-zinc-800 px-3 py-1.5 text-[10px] font-bold font-mono text-gray-200 shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]';
+      completedBtn.className = 'border-2 border-midnight-border bg-black px-3 py-1.5 text-[10px] font-bold font-mono text-zinc-500 shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]';
+    });
+
+    completedBtn.addEventListener('click', () => {
+      currentNewBookStatus = 'completed';
+      readingBtn.className = 'border-2 border-midnight-border bg-black px-3 py-1.5 text-[10px] font-bold font-mono text-zinc-500 shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]';
+      completedBtn.className = 'border-2 border-[#ff0055]/20 bg-accent-pink/10 px-3 py-1.5 text-[10px] font-bold font-mono text-accent-pink shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]';
+    });
+
+    const btnAddBook = document.getElementById('btn-add-book');
+    const bookTitleInput = document.getElementById('book-title-input');
+    const bookAuthorInput = document.getElementById('book-author-input');
+    const bookReviewInput = document.getElementById('book-review-input');
+    const bookLogsContainer = document.getElementById('book-logs-container');
+
+    btnAddBook.addEventListener('click', () => {
+      const title = bookTitleInput.value.trim();
+      const author = bookAuthorInput.value.trim() || '미상';
+      const review = bookReviewInput.value.trim();
+
+      if (!title || !review) {
+        CE.showToast('오류: 책 제목과 한 줄 평을 성실하게 기재해 주세요.');
+        return;
+      }
+
+      const statusBadge = currentNewBookStatus === 'reading'
+        ? '<span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded-none mb-1 font-bold">읽는 중 (Reading)</span>'
+        : '<span class="inline-block text-[9px] font-mono px-1.5 py-0.5 bg-accent-pink/10 text-accent-pink border-accent-pink/20 rounded-none mb-1 font-bold">완독 (Completed)</span>';
+
+      const newBookCard = document.createElement('div');
+      newBookCard.className = 'bg-black border-2 border-midnight-border p-4 flex gap-4 hover:border-accent-pink/50 transition duration-150 opacity-0 transform translate-y-2';
+
+      const randImageId = Math.floor(Math.random() * 1000);
+      const bookCoverUrl = `https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=150&auto=format&fit=crop&q=60&sig=${randImageId}`;
+
+      newBookCard.innerHTML = `
+        <div class="w-16 h-24 md:w-20 md:h-28 rounded-none border border-zinc-700 bg-zinc-950 flex-shrink-0 p-0.5">
+          <img src="${bookCoverUrl}" alt="신규 등록 표지" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col justify-between flex-grow">
+          <div>
+            <div class="flex justify-between items-start gap-1">
+              <div>
+                ${statusBadge}
+                <h4 class="text-sm font-extrabold text-white leading-tight">${title}</h4>
+                <p class="text-[11px] text-zinc-500 font-mono mt-0.5">저자: ${author}</p>
+              </div>
+              <span class="font-mono text-xs text-accent-pink font-bold">★ 5.0</span>
+            </div>
+            <div class="mt-2 border-t border-midnight-border pt-2 text-xs">
+              <p class="text-zinc-300 italic leading-relaxed">
+                "${review}"
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      bookLogsContainer.insertBefore(newBookCard, bookLogsContainer.firstChild);
+
+      window.setTimeout(() => {
+        newBookCard.classList.remove('opacity-0', 'translate-y-2');
+      }, 50);
+
+      bookTitleInput.value = '';
+      bookAuthorInput.value = '';
+      bookReviewInput.value = '';
+
+      readingBtn.click();
+    });
+  </script>
+</body>
+</html>

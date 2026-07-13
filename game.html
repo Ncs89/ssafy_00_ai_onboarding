@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01_GAME // C.E</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.tailwindcss.com/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ce: {
+              black: '#030304',
+              gray: '#121214',
+              pink: '#ff0055',
+              cyan: '#00f0ff'
+            },
+            midnight: {
+              DEFAULT: '#09090b',
+              darker: '#030304',
+              card: '#121214',
+              border: '#27272a'
+            },
+            accent: {
+              pink: '#ff0055',
+              cyan: '#00f0ff',
+              glow: 'rgba(255, 0, 85, 0.15)'
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="game" class="bg-ce-black text-zinc-200 overflow-x-hidden font-sans antialiased selection:bg-accent-pink selection:text-white">
+  <div class="fixed inset-0 z-[9999] pointer-events-none opacity-40 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px]"></div>
+
+  <header class="sticky top-0 z-50 border-b-4 border-black bg-midnight-card px-6 py-5 shadow-[4px_4px_0px_#000000]">
+    <div class="max-w-7xl mx-auto flex flex-col gap-4">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <div class="bg-accent-pink text-midnight-darker text-[9px] font-mono px-2 py-0.5 font-bold tracking-wider">COLLAPSE_PREVENTION_SYSTEM</div>
+            <span class="font-mono text-[10px] text-zinc-500 font-bold">RE_v4.2.1-CE</span>
+          </div>
+          <h1 class="font-mono text-3xl md:text-4xl tracking-wider text-white font-extrabold mt-1 uppercase">CHANSOL'S HOBBY</h1>
+          <p class="text-sm text-gray-400 mt-2 font-semibold">
+            롤, 음악, 그리고 책. 내가 가장 나다워지는 세 가지 방법
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-[10px] font-mono">
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            STATUS: <span class="text-accent-cyan">SIGNAL_ACTIVE</span>
+          </div>
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            SYS_TIME: <span id="digital-clock" class="text-accent-pink">00:00:00</span>
+          </div>
+          <button id="crt-toggle" class="flex items-center gap-1.5 border-2 border-zinc-800 bg-zinc-900 px-3 py-1.5 font-bold text-white shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-zinc-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+            <i data-lucide="monitor" class="w-3.5 h-3.5 text-accent-pink"></i>
+            CRT_MODE
+          </button>
+        </div>
+      </div>
+
+      <nav class="bg-black/95 backdrop-blur-md border-2 border-black px-4 py-2">
+        <div class="max-w-7xl mx-auto flex justify-center gap-3 md:gap-8 text-[10px] md:text-xs font-mono">
+          <a href="game.html" data-nav-link="game" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[01_GAME]</span>
+          </a>
+          <a href="music.html" data-nav-link="music" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[02_MUSIC]</span>
+          </a>
+          <a href="reading.html" data-nav-link="reading" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[03_BOOK]</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl w-full mx-auto p-4 md:p-6 my-6">
+    <section id="section-lol" class="relative flex flex-col rounded-none border-2 border-black bg-midnight-card p-5 shadow-[4px_4px_0px_#000000] scroll-mt-36 md:p-6">
+      <div class="-mx-5 -mt-5 mb-5 flex items-center justify-between border-b-2 border-black bg-[repeating-linear-gradient(45deg,#121214,#121214_10px,#1c1c1f_10px,#1c1c1f_20px)] px-5 py-4 md:-mx-6 md:-mt-6 md:px-6">
+        <div class="flex items-center gap-2">
+          <i data-lucide="swords" class="w-5 h-5 text-accent-pink"></i>
+          <span class="font-mono font-extrabold text-white tracking-tight flex items-center gap-2">
+            01 // LEAGUE OF LEGENDS
+            <span class="text-[10px] text-zinc-400 font-bold border border-accent-pink/40 px-1.5 py-0.5 bg-black">SINCE 2013</span>
+          </span>
+        </div>
+        <span class="text-[10px] font-mono text-accent-pink font-bold bg-black border border-accent-pink px-2.5 py-0.5">SYS_PARAM: 0x99_LOL</span>
+      </div>
+
+      <div class="space-y-6 text-sm leading-relaxed">
+        <div class="bg-black border-2 border-midnight-border p-4">
+          <span class="font-mono text-xs text-accent-pink uppercase tracking-wider block mb-1.5 font-bold">&gt; DRIVER_CHARACTERISTIC</span>
+          <p class="text-zinc-300">
+            작년까지는 주력 포지션이 원거리 딜러였으나, 친구의 간곡한(?) 권유로 인해 현재는 서포터로 강제 전향했습니다. 정교하고 빠른 피지컬 교전보다는 넓게 맵을 보며 핵심 시야를 장악하고 오더를 전개하는 운영적 플레이에 고도로 집중하고 있습니다.
+          </p>
+          <div class="mt-4 border-t border-dashed border-midnight-border pt-4">
+            <div class="flex justify-between text-xs text-zinc-400 mb-2 font-mono font-bold">
+              <span>PHYSICAL_ENGAGE</span>
+              <span id="style-value" class="text-accent-pink font-bold">35 : 65</span>
+              <span>TACTICAL_COMMAND</span>
+            </div>
+            <input type="range" min="0" max="100" value="35" id="playstyle-slider" class="w-full accent-accent-pink bg-zinc-800 h-1.5 cursor-pointer">
+          </div>
+        </div>
+
+        <div class="bg-black border-2 border-midnight-border p-4 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-midnight-border pb-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 bg-zinc-900 border-2 border-accent-pink flex flex-col items-center justify-center relative">
+                <i data-lucide="shield-alert" class="w-7 h-7 text-accent-pink"></i>
+                <span class="text-[8px] font-mono text-accent-cyan font-bold absolute bottom-0.5">EM_IV</span>
+              </div>
+              <div>
+                <span class="font-mono text-[9px] text-zinc-500 block font-bold">DATA_DRAGON // PROFILE_METRICS</span>
+                <h3 class="font-bold text-white text-base tracking-tight">에메랄드 IV <span class="font-mono text-xs text-accent-pink font-bold ml-1">[47 LP]</span></h3>
+                <p class="text-xs text-zinc-400 font-mono mt-0.5">RECORDED_RATIO: <span id="lol-win-rate" class="text-accent-cyan font-bold">55.9%</span> (57W 45L)</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="min-w-[110px] border-2 border-midnight-border bg-midnight-card px-4 py-2 text-center shadow-[4px_4px_0px_#000000]">
+                <span class="text-[8px] font-mono text-zinc-500 block uppercase font-bold">SECTOR</span>
+                <span class="text-xs font-bold text-white flex items-center justify-center gap-1 mt-0.5">SUPPORT</span>
+              </div>
+              <div class="min-w-[110px] border-2 border-midnight-border bg-midnight-card px-4 py-2 text-center shadow-[4px_4px_0px_#000000]">
+                <span class="text-[8px] font-mono text-zinc-500 block uppercase font-bold">KDA_INDEX</span>
+                <span class="text-xs font-bold text-accent-pink font-mono flex items-center justify-center gap-1 mt-0.5">2.81 : 1</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-3 font-bold">&gt; REGISTERED_CHAMPIONS</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-center justify-between border-2 border-black bg-midnight-card p-3 text-xs shadow-[4px_4px_0px_#000000]">
+                <div class="flex items-center gap-3">
+                  <div class="relative p-0.5 bg-black border border-zinc-700">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Nautilus.png" alt="노틸러스" class="w-9 h-9 object-cover" onerror="CE.handleImgError(this, 'yellow')">
+                  </div>
+                  <span class="font-extrabold text-white">노틸러스</span>
+                </div>
+                <span class="font-mono text-zinc-400 text-[11px] text-right">47게임 <br><span class="text-accent-pink">60%</span> / 2.93</span>
+              </div>
+                <div class="flex items-center justify-between border-2 border-black bg-midnight-card p-3 text-xs shadow-[4px_4px_0px_#000000]">
+                <div class="flex items-center gap-3">
+                  <div class="relative p-0.5 bg-black border border-zinc-700">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Leona.png" alt="레오나" class="w-9 h-9 object-cover" onerror="CE.handleImgError(this, 'amber')">
+                  </div>
+                  <span class="font-extrabold text-white">레오나</span>
+                </div>
+                <span class="font-mono text-zinc-400 text-[11px] text-right">17게임 <br><span class="text-accent-pink">59%</span> / 2.86</span>
+              </div>
+                <div class="flex items-center justify-between border-2 border-black bg-midnight-card p-3 text-xs shadow-[4px_4px_0px_#000000]">
+                <div class="flex items-center gap-3">
+                  <div class="relative p-0.5 bg-black border border-zinc-700">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Nami.png" alt="나미" class="w-9 h-9 object-cover" onerror="CE.handleImgError(this, 'cyan')">
+                  </div>
+                  <span class="font-extrabold text-white">나미</span>
+                </div>
+                <span class="font-mono text-zinc-400 text-[11px] text-right">11게임 <br><span class="text-accent-pink">45%</span> / 2.93</span>
+              </div>
+                <div class="flex items-center justify-between border-2 border-black bg-midnight-card p-3 text-xs shadow-[4px_4px_0px_#000000]">
+                <div class="flex items-center gap-3">
+                  <div class="relative p-0.5 bg-black border border-zinc-700">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Brand.png" alt="브랜드" class="w-9 h-9 object-cover" onerror="CE.handleImgError(this, 'orange')">
+                  </div>
+                  <span class="font-extrabold text-white">브랜드</span>
+                </div>
+                <span class="font-mono text-zinc-400 text-[11px] text-right">7게임 <br><span class="text-accent-pink">71%</span> / 1.73</span>
+              </div>
+                <div class="flex items-center justify-between border-2 border-black bg-midnight-card p-3 text-xs shadow-[4px_4px_0px_#000000] md:col-span-2">
+                <div class="flex items-center gap-3">
+                  <div class="relative p-0.5 bg-black border border-zinc-700">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="징크스" class="w-9 h-9 object-cover" onerror="CE.handleImgError(this, 'purple')">
+                  </div>
+                  <span class="font-extrabold text-white">징크스</span>
+                </div>
+                <span class="font-mono text-zinc-400 text-[11px] text-right">6게임 <br><span class="text-accent-pink">50%</span> / 2.38</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-black border-2 border-midnight-border p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-midnight-border pb-2 gap-3">
+              <span class="font-mono text-xs text-accent-pink uppercase font-bold">&gt; DISPATCH_INTERRUPT_REPLAYS</span>
+                <button id="btn-add-match" class="border-2 border-[#ff0055] bg-accent-pink px-3 py-1.5 text-xs font-extrabold text-black shadow-[3px_3px_0px_#000000] transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+                + EXECUTE_MOCK_MATCH
+              </button>
+            </div>
+            <div id="match-history-container" class="space-y-2 max-h-48 overflow-y-auto font-mono text-xs">
+              <div class="flex items-center justify-between bg-zinc-900 border border-emerald-500/30 p-2.5 text-emerald-400">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold">[VICTORY]</span>
+                  <span>노틸러스 (1 / 4 / 18)</span>
+                </div>
+                <span class="text-zinc-500">14m ago</span>
+              </div>
+              <div class="flex items-center justify-between bg-zinc-900 border border-red-500/30 p-2.5 text-red-500">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold">[DEFEAT]</span>
+                  <span>나미 (0 / 5 / 8)</span>
+                </div>
+                <span class="text-zinc-500">1h ago</span>
+              </div>
+              <div class="flex items-center justify-between bg-zinc-900 border border-emerald-500/30 p-2.5 text-emerald-400">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold">[VICTORY]</span>
+                  <span>브랜드 (4 / 6 / 9)</span>
+                </div>
+                <span class="text-zinc-500">3h ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t-4 border-black bg-midnight-card px-6 py-4 font-mono text-xs text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span>MEM_USAGE: <span class="text-accent-pink font-bold">38.9MB / 512MB</span></span>
+        <span class="hidden md:inline">|</span>
+        <span class="hidden md:inline">SYSTEM: <span class="text-accent-cyan font-bold">COLLAPSE_STABLE_v1</span></span>
+      </div>
+      <div>
+        <p>&copy; 2026. MY PERSONAL ARCHIVE. <span class="animate-[blink_1s_infinite] text-accent-pink font-bold">_</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+  <script>
+    const slider = document.getElementById('playstyle-slider');
+    const sliderValue = document.getElementById('style-value');
+    slider.addEventListener('input', (event) => {
+      const physical = event.target.value;
+      const operational = 100 - physical;
+      sliderValue.textContent = `${physical} : ${operational}`;
+    });
+
+    const matchHistoryContainer = document.getElementById('match-history-container');
+    const btnAddMatch = document.getElementById('btn-add-match');
+    const lolWinRateText = document.getElementById('lol-win-rate');
+
+    let totalWins = 57;
+    let totalLosses = 45;
+
+    const champions = ['노틸러스', '레오나', '나미', '브랜드', '징크스'];
+    const supportKdaPool = [
+      { k: 1, d: 4, a: 15 },
+      { k: 2, d: 6, a: 12 },
+      { k: 0, d: 3, a: 21 },
+      { k: 3, d: 5, a: 11 },
+      { k: 1, d: 2, a: 14 }
+    ];
+    const adkdaPool = [
+      { k: 9, d: 3, a: 7 },
+      { k: 5, d: 5, a: 9 }
+    ];
+
+    btnAddMatch.addEventListener('click', () => {
+      const isVictory = Math.random() > 0.45;
+      const randChamp = champions[Math.floor(Math.random() * champions.length)];
+      const kda = randChamp === '징크스'
+        ? adkdaPool[Math.floor(Math.random() * adkdaPool.length)]
+        : supportKdaPool[Math.floor(Math.random() * supportKdaPool.length)];
+
+      if (isVictory) {
+        totalWins += 1;
+      } else {
+        totalLosses += 1;
+      }
+
+      const newWinRate = ((totalWins / (totalWins + totalLosses)) * 100).toFixed(1);
+      lolWinRateText.textContent = `${newWinRate}% (${totalWins}W ${totalLosses}L)`;
+
+      const matchDiv = document.createElement('div');
+      matchDiv.className = `flex items-center justify-between p-2.5 rounded-none text-xs transition duration-500 transform translate-y-2 opacity-0 ${isVictory ? 'bg-zinc-900 border border-emerald-500/30 text-emerald-400' : 'bg-zinc-900 border border-red-500/30 text-red-500'}`;
+      matchDiv.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="font-mono font-bold">${isVictory ? '[VICTORY]' : '[DEFEAT]'}</span>
+          <span class="font-medium">${randChamp} (${kda.k} / ${kda.d} / ${kda.a})</span>
+        </div>
+        <span class="font-mono text-zinc-500">방금 전</span>
+      `;
+
+      matchHistoryContainer.insertBefore(matchDiv, matchHistoryContainer.firstChild);
+
+      window.setTimeout(() => {
+        matchDiv.classList.remove('translate-y-2', 'opacity-0');
+      }, 50);
+
+      matchHistoryContainer.scrollTop = 0;
+    });
+  </script>
+</body>
+</html>

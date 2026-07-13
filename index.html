@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INITIALIZING_SEQUENCE // START</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.tailwindcss.com/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ce: {
+              black: '#030304',
+              gray: '#121214',
+              pink: '#ff0055',
+              cyan: '#00f0ff'
+            },
+            midnight: {
+              DEFAULT: '#09090b',
+              darker: '#030304',
+              card: '#121214',
+              border: '#27272a'
+            },
+            accent: {
+              pink: '#ff0055',
+              cyan: '#00f0ff',
+              glow: 'rgba(255, 0, 85, 0.15)'
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="intro" class="overflow-hidden bg-[#030304] font-mono text-zinc-200">
+  <div id="intro-screen" class="relative flex min-h-screen items-center justify-center">
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-[0.05] [background:url('data:image/svg+xml;utf8,%3Csvg%20viewBox=%220%200%20200%20200%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter%20id=%22noiseFilter%22%3E%3CfeTurbulence%20type=%22fractalNoise%22%20baseFrequency=%220.65%22%20numOctaves=%223%22%20stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect%20width=%22100%25%22%20height=%22100%25%22%20filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]"></div>
+    <div class="fixed inset-0 z-10 pointer-events-none opacity-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px]"></div>
+    <div class="absolute inset-0 z-[1] bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:40px_40px]"></div>
+
+    <nav class="absolute top-0 inset-x-0 z-20 bg-black/70 backdrop-blur-md border-b border-black px-4 py-3">
+      <div class="max-w-7xl mx-auto flex justify-center gap-3 md:gap-8 text-[10px] md:text-xs font-mono">
+        <a href="game.html" data-nav-link="game" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+          <span>[01_GAME]</span>
+        </a>
+        <a href="music.html" data-nav-link="music" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+          <span>[02_MUSIC]</span>
+        </a>
+        <a href="reading.html" data-nav-link="reading" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+          <span>[03_BOOK]</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="z-30 flex w-full max-w-lg flex-col items-center px-6 pb-8 pt-24">
+      <div class="glitch-wrapper relative mb-10 md:mb-12">
+        <h1 class="glitch-text text-5xl md:text-7xl text-center" data-text="IDENTIFY">IDENTIFY</h1>
+      </div>
+
+      <div class="relative w-full border-4 border-black bg-ce-gray p-8 shadow-[4px_4px_0px_#000000]">
+        <div class="mb-4 flex items-center justify-between text-[10px] font-mono text-zinc-500">
+          <span>ENTRY GATE // START_PAGE</span>
+          <span class="text-accent-pink font-bold">ACCESS_REQUIRED</span>
+        </div>
+        <form id="auth-form" class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] text-zinc-400 font-bold tracking-wider">USER_NICKNAME</label>
+            <input type="text" id="nickname" required autocomplete="off" class="w-full border-[3px] border-zinc-800 bg-transparent p-4 text-center text-xl tracking-wider text-white outline-none transition-all duration-200 focus:border-[#ff0055] focus:bg-[#121214]" placeholder="[ _ ]">
+          </div>
+          <button type="submit" class="w-full cursor-pointer border-[3px] border-[#ff0055] bg-[#ff0055] py-4 text-lg font-black tracking-widest text-[#030304] shadow-[4px_4px_0px_#000000] transition-all duration-100 hover:border-[#00f0ff] hover:bg-[#00f0ff] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[1px_1px_0px_#000000]">
+            ACCESS_ARCHIVE
+          </button>
+        </form>
+      </div>
+
+      <p class="mt-5 text-[11px] text-zinc-500 font-mono text-center leading-relaxed">
+        진입 후에는 01_GAME, 02_MUSIC, 03_BOOK 페이지로 이동할 수 있습니다.
+      </p>
+    </main>
+  </div>
+
+  <script src="assets/site.js"></script>
+  <script>
+    const introScreen = document.getElementById('intro-screen');
+    const authForm = document.getElementById('auth-form');
+
+    authForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const nickname = document.getElementById('nickname').value.trim();
+      if (!nickname) return;
+
+      sessionStorage.setItem('ce-nickname', nickname);
+      introScreen.classList.add('animate-[fadeOut_1.5s_forwards]');
+
+      setTimeout(() => {
+        window.location.href = 'game.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

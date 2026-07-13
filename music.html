@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02_MUSIC // C.E</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.tailwindcss.com/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ce: {
+              black: '#030304',
+              gray: '#121214',
+              pink: '#ff0055',
+              cyan: '#00f0ff'
+            },
+            midnight: {
+              DEFAULT: '#09090b',
+              darker: '#030304',
+              card: '#121214',
+              border: '#27272a'
+            },
+            accent: {
+              pink: '#ff0055',
+              cyan: '#00f0ff',
+              glow: 'rgba(255, 0, 85, 0.15)'
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="music" class="bg-ce-black text-zinc-200 overflow-x-hidden font-sans antialiased selection:bg-accent-pink selection:text-white">
+  <div class="fixed inset-0 z-[9999] pointer-events-none opacity-40 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px]"></div>
+
+  <header class="sticky top-0 z-50 border-b-4 border-black bg-midnight-card px-6 py-5 shadow-[4px_4px_0px_#000000]">
+    <div class="max-w-7xl mx-auto flex flex-col gap-4">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <div class="bg-accent-pink text-midnight-darker text-[9px] font-mono px-2 py-0.5 font-bold tracking-wider">COLLAPSE_PREVENTION_SYSTEM</div>
+            <span class="font-mono text-[10px] text-zinc-500 font-bold">RE_v4.2.1-CE</span>
+          </div>
+          <h1 class="font-mono text-3xl md:text-4xl tracking-wider text-white font-extrabold mt-1 uppercase">CHANSOL'S MUSIC</h1>
+          <p class="text-sm text-gray-400 mt-2 font-semibold">
+            내가 가장 자주 재생하는 소리의 기록
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-[10px] font-mono">
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            STATUS: <span class="text-accent-cyan">AUDIO_STREAM_READY</span>
+          </div>
+          <div class="bg-black border-2 border-midnight-border px-3 py-1.5 font-bold text-zinc-400">
+            SYS_TIME: <span id="digital-clock" class="text-accent-pink">00:00:00</span>
+          </div>
+          <button id="crt-toggle" class="flex items-center gap-1.5 border-2 border-zinc-800 bg-zinc-900 px-3 py-1.5 font-bold text-white shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-zinc-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+            <i data-lucide="monitor" class="w-3.5 h-3.5 text-accent-pink"></i>
+            CRT_MODE
+          </button>
+        </div>
+      </div>
+
+      <nav class="bg-black/95 backdrop-blur-md border-2 border-black px-4 py-2">
+        <div class="max-w-7xl mx-auto flex justify-center gap-3 md:gap-8 text-[10px] md:text-xs font-mono">
+          <a href="game.html" data-nav-link="game" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[01_GAME]</span>
+          </a>
+          <a href="music.html" data-nav-link="music" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[02_MUSIC]</span>
+          </a>
+          <a href="reading.html" data-nav-link="reading" class="text-zinc-500 hover:text-accent-pink pb-1.5 px-2 transition-all duration-150 flex items-center gap-1.5 font-bold">
+            <span>[03_BOOK]</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl w-full mx-auto p-4 md:p-6 my-6">
+    <section id="section-music" class="relative flex flex-col rounded-none border-2 border-black bg-midnight-card p-5 shadow-[4px_4px_0px_#000000] scroll-mt-36 md:p-6">
+      <div class="absolute top-1 left-1 text-[9px] text-zinc-700 font-bold">[┌]</div>
+      <div class="absolute top-1 right-1 text-[9px] text-zinc-700 font-bold">[┐]</div>
+      <div class="absolute bottom-1 left-1 text-[9px] text-zinc-700 font-bold">[└]</div>
+      <div class="absolute bottom-1 right-1 text-[9px] text-zinc-700 font-bold">[┘]</div>
+
+      <div class="-mx-5 -mt-5 mb-5 flex items-center justify-between border-b-2 border-black bg-[repeating-linear-gradient(45deg,#121214,#121214_10px,#1c1c1f_10px,#1c1c1f_20px)] px-5 py-4 md:-mx-6 md:-mt-6 md:px-6">
+        <div class="flex items-center gap-2">
+          <i data-lucide="music" class="w-5 h-5 text-accent-pink"></i>
+          <span class="font-mono font-extrabold text-white tracking-tight flex items-center gap-2">
+            02 // MUSIC PLAYLIST
+            <span class="text-[10px] text-zinc-400 font-bold border border-accent-pink/40 px-1.5 py-0.5 bg-black">SINCE 2025</span>
+          </span>
+        </div>
+        <span class="text-[10px] font-mono text-accent-pink font-bold bg-black border border-accent-pink px-2.5 py-0.5">SYS_PARAM: 0x99_AUDIO</span>
+      </div>
+
+      <div class="space-y-6 text-sm flex flex-col">
+        <div class="bg-black border-2 border-midnight-border p-4 flex flex-col items-center">
+          <div class="relative w-full aspect-[16/9] bg-zinc-950 border-4 border-black p-3 overflow-hidden shadow-inner max-w-sm">
+            <div class="absolute top-1 left-1 text-[7px] font-mono text-zinc-500">DECK MULTIPLEX v2.0</div>
+            <div class="absolute top-1 right-1 text-[7px] font-mono text-accent-pink">A-SIDE</div>
+            <div class="w-full flex justify-between items-center px-4 my-2 z-10 relative">
+              <div class="w-12 h-12 rounded-full border-2 border-zinc-800 bg-zinc-900 flex items-center justify-center">
+                <div id="gear-1" class="w-8 h-8 animate-[spin_6s_linear_infinite] rounded-full border border-dashed border-accent-pink flex items-center justify-center [animation-play-state:paused]">
+                  <div class="w-2.5 h-2.5 bg-zinc-950 rounded-full border border-zinc-800"></div>
+                </div>
+              </div>
+              <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-none border-2 border-black bg-zinc-950 shadow-[4px_4px_0px_#000000]">
+                <img id="player-cover" src="https://i.scdn.co/image/ab67616d0000b2734c2ec33b8a34bcbb2bf1884a" alt="앨범 커버" class="w-full h-full object-cover transition-all duration-300" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=60'">
+              </div>
+              <div class="w-12 h-12 rounded-full border-2 border-zinc-800 bg-zinc-900 flex items-center justify-center">
+                <div id="gear-2" class="w-8 h-8 animate-[spin_6s_linear_infinite] rounded-full border border-dashed border-accent-pink flex items-center justify-center [animation-play-state:paused]">
+                  <div class="w-2.5 h-2.5 bg-zinc-950 rounded-full border border-zinc-800"></div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full h-4 bg-black border border-zinc-800 rounded-none px-1.5 flex items-center justify-between gap-1">
+              <span class="text-[8px] text-zinc-600 font-mono">VU_L:</span>
+              <div class="flex-grow flex items-center gap-0.5 h-2 px-1" id="vu-meter">
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="g-1"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="g-2"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="g-3"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="g-4"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="y-1"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="y-2"></span>
+                <span class="w-1.5 h-1 bg-zinc-800 transition-colors duration-100" data-led="r-1"></span>
+              </div>
+              <span id="player-timer" class="text-xs text-accent-pink font-mono font-bold glow-text">0:00</span>
+            </div>
+            <div class="bg-black border border-zinc-800 px-3 py-2 flex justify-between items-center font-mono rounded-none">
+              <div class="overflow-hidden whitespace-nowrap text-ellipsis mr-2 flex-grow">
+                <span id="player-title" class="text-xs text-accent-cyan font-bold tracking-tight glow-text block">extra ending</span>
+                <span class="text-[9px] text-zinc-500 block mt-0.5" id="player-artist">Project Aces</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-4 bg-midnight-card border border-midnight-border p-2">
+            <button id="btn-prev" class="border-2 border-zinc-800 bg-zinc-900 p-2 text-zinc-300 shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-zinc-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+              <i data-lucide="skip-back" class="w-4 h-4"></i>
+            </button>
+            <button id="btn-play" class="border-2 border-[#ff0055] bg-accent-pink p-3 text-black shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-rose-600 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+              <i id="play-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
+            </button>
+            <button id="btn-next" class="border-2 border-zinc-800 bg-zinc-900 p-2 text-zinc-300 shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:bg-zinc-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000]">
+              <i data-lucide="skip-forward" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2.5 font-bold">&gt; AUDIO_FILTER_SELECTION</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button id="btn-mood-hiphop" class="mood-tab border-2 border-zinc-800 bg-zinc-900 py-2.5 px-1 text-center text-xs font-semibold text-zinc-400 shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:text-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000] flex flex-col items-center gap-1">
+              <i data-lucide="disc" class="w-4 h-4"></i>
+              <span>i. Hiphop</span>
+            </button>
+            <button id="btn-mood-favorite" class="mood-tab active border-2 border-[#ff0055] bg-zinc-950 py-2.5 px-1 text-center text-xs font-semibold text-accent-pink shadow-[3px_3px_0px_#000000] flex flex-col items-center gap-1">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+              <span>ii. Favorite</span>
+            </button>
+            <button id="btn-mood-etc" class="mood-tab border-2 border-zinc-800 bg-zinc-900 py-2.5 px-1 text-center text-xs font-semibold text-zinc-400 shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:text-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000] flex flex-col items-center gap-1">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              <span>iii. Etc</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-black border-2 border-midnight-border p-3 mt-2 flex-grow">
+          <div class="flex justify-between text-[10px] font-mono text-zinc-500 mb-2 border-b border-midnight-border pb-1">
+            <span>INDEX // TRACK TITLE</span>
+            <span>DURATION</span>
+          </div>
+          <div id="playlist-track-list" class="space-y-1.5 max-h-60 overflow-y-auto"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t-4 border-black bg-midnight-card px-6 py-4 font-mono text-xs text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span>MEM_USAGE: <span class="text-accent-pink font-bold">38.9MB / 512MB</span></span>
+        <span class="hidden md:inline">|</span>
+        <span class="hidden md:inline">SYSTEM: <span class="text-accent-cyan font-bold">COLLAPSE_STABLE_v1</span></span>
+      </div>
+      <div>
+        <p>&copy; 2026. MY PERSONAL ARCHIVE. <span class="animate-[blink_1s_infinite] text-accent-pink font-bold">_</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+  <script>
+    const songsData = {
+      hiphop: [
+        { title: 'Break', artist: 'Beenzino', duration: '3:18', cover: 'https://i.scdn.co/image/ab67616d0000b273d2745a004eb7c52ee3e39097' },
+        { title: 'Aqua Man', artist: 'Beenzino', duration: '3:42', cover: 'https://i.scdn.co/image/ab67616d0000b27341e33d4554867721865db245' },
+        { title: 'DNA.', artist: 'Kendrick Lamar', duration: '3:05', cover: 'https://i.scdn.co/image/ab67616d0000b273cd945b4e3de57fe2843fc43b' },
+        { title: 'SICKO MODE', artist: 'Travis Scott', duration: '5:12', cover: 'https://i.scdn.co/image/ab67616d0000b2730724694abaf34a3674ca9cb2' }
+      ],
+      favorite: [
+        { title: 'extra ending', artist: 'Project Aces', duration: '4:12', cover: 'https://i.scdn.co/image/ab67616d0000b2734c2ec33b8a34bcbb2bf1884a' },
+        { title: '지켜줄게 see you again', artist: '백예린', duration: '3:41', cover: 'https://i.scdn.co/image/ab67616d0000b2734293fe2bc3c5827361730ec8' },
+        { title: 'ilang ilang', artist: 'FKJ', duration: '3:47', cover: 'https://i.scdn.co/image/ab67616d0000b27344be891ef627cf97fec636a0' }
+      ],
+      etc: [
+        { title: 'Ditto', artist: 'NewJeans', duration: '3:06', cover: 'https://i.scdn.co/image/ab67616d0000b2733d9c3395968c9f0aa5af002d' },
+        { title: 'Night Dancer', artist: 'imase', duration: '3:30', cover: 'https://i.scdn.co/image/ab67616d0000b27382025b399cc1b3053805f6e8' },
+        { title: 'Viva La Vida', artist: 'Coldplay', duration: '4:02', cover: 'https://i.scdn.co/image/ab67616d0000b2738600decbc8f5223c72bdf337' }
+      ]
+    };
+
+    let currentMood = 'favorite';
+    let currentTrackIdx = 0;
+    let isPlaying = false;
+    let trackTimer = 0;
+    let timerInterval = null;
+    let vuInterval = null;
+
+    const ledElements = document.querySelectorAll('[data-led]');
+    const playlistContainer = document.getElementById('playlist-track-list');
+    const playerTitle = document.getElementById('player-title');
+    const playerArtist = document.getElementById('player-artist');
+    const playerTimer = document.getElementById('player-timer');
+    const playerCover = document.getElementById('player-cover');
+    const playBtn = document.getElementById('btn-play');
+    const playIcon = document.getElementById('play-icon');
+    const gear1 = document.getElementById('gear-1');
+    const gear2 = document.getElementById('gear-2');
+
+    const moodTabs = document.querySelectorAll('.mood-tab');
+    document.getElementById('btn-mood-hiphop').addEventListener('click', () => changeMood('hiphop'));
+    document.getElementById('btn-mood-favorite').addEventListener('click', () => changeMood('favorite'));
+    document.getElementById('btn-mood-etc').addEventListener('click', () => changeMood('etc'));
+
+    function changeMood(mood) {
+      currentMood = mood;
+      currentTrackIdx = 0;
+
+      moodTabs.forEach((tab) => {
+        tab.className = 'mood-tab border-2 border-zinc-800 bg-zinc-900 py-2.5 px-1 text-center text-xs font-semibold text-zinc-400 shadow-[3px_3px_0px_#000000] transition-all duration-100 hover:text-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000000] flex flex-col items-center gap-1';
+      });
+
+      const activeTab = document.getElementById(`btn-mood-${mood}`);
+      activeTab.className = 'mood-tab active border-2 border-[#ff0055] bg-zinc-950 py-2.5 px-1 text-center text-xs font-semibold text-accent-pink shadow-[3px_3px_0px_#000000] flex flex-col items-center gap-1';
+
+      renderPlaylist();
+      loadTrack(0);
+    }
+
+    function renderPlaylist() {
+      playlistContainer.innerHTML = '';
+      songsData[currentMood].forEach((song, idx) => {
+        const trackDiv = document.createElement('div');
+        trackDiv.className = `flex justify-between items-center p-2.5 rounded-none text-xs cursor-pointer hover:bg-zinc-800 transition ${idx === currentTrackIdx ? 'bg-accent-pink/10 text-accent-pink border-l-2 border-accent-pink pl-1.5 font-bold' : 'text-zinc-400'}`;
+        trackDiv.onclick = () => loadTrack(idx);
+        trackDiv.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-[10px] text-zinc-600">${String(idx + 1).padStart(2, '0')}</span>
+            <div class="w-6 h-6 border border-zinc-700 overflow-hidden flex-shrink-0">
+              <img src="${song.cover}" alt="${song.title} 커버" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=50&auto=format&fit=crop&q=60'">
+            </div>
+            <span class="font-medium">${song.title}</span>
+          </div>
+          <span class="font-mono text-[11px] text-zinc-500">${song.duration}</span>
+        `;
+        playlistContainer.appendChild(trackDiv);
+      });
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      trackTimer = 0;
+      playerTimer.textContent = '0:00';
+    }
+
+    function startVUMeter() {
+      stopVUMeter();
+      vuInterval = window.setInterval(() => {
+        const bounceLevel = Math.floor(Math.random() * (ledElements.length + 1));
+        ledElements.forEach((led, idx) => {
+          const type = led.getAttribute('data-led')[0];
+          if (idx < bounceLevel) {
+            if (type === 'g') led.className = 'w-1.5 h-2 bg-accent-pink shadow-[0_0_4px_#ff0055]';
+            if (type === 'y') led.className = 'w-1.5 h-2 bg-amber-400 shadow-[0_0_4px_#F59E0B]';
+            if (type === 'r') led.className = 'w-1.5 h-2 bg-red-500 shadow-[0_0_4px_#EF4444]';
+          } else {
+            led.className = 'w-1.5 h-1 bg-zinc-800 shadow-none';
+          }
+        });
+      }, 120);
+    }
+
+    function stopVUMeter() {
+      if (vuInterval) window.clearInterval(vuInterval);
+      ledElements.forEach((led) => {
+        led.className = 'w-1.5 h-1 bg-zinc-800 shadow-none';
+      });
+    }
+
+    function loadTrack(idx) {
+      currentTrackIdx = idx;
+      const track = songsData[currentMood][currentTrackIdx];
+      playerTitle.textContent = track.title;
+      playerArtist.textContent = track.artist;
+      playerCover.src = track.cover;
+      resetTimer();
+      renderPlaylist();
+
+      if (isPlaying) {
+        startTimer();
+        startVUMeter();
+      } else {
+        stopVUMeter();
+      }
+    }
+
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playIcon.setAttribute('data-lucide', 'pause');
+        CE.setupLucide();
+        gear1.classList.remove('[animation-play-state:paused]');
+        gear2.classList.remove('[animation-play-state:paused]');
+        startTimer();
+        startVUMeter();
+      } else {
+        playIcon.setAttribute('data-lucide', 'play');
+        CE.setupLucide();
+        gear1.classList.add('[animation-play-state:paused]');
+        gear2.classList.add('[animation-play-state:paused]');
+        pauseTimer();
+        stopVUMeter();
+      }
+    });
+
+    document.getElementById('btn-prev').addEventListener('click', () => {
+      let nextIdx = currentTrackIdx - 1;
+      if (nextIdx < 0) nextIdx = songsData[currentMood].length - 1;
+      loadTrack(nextIdx);
+    });
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      const nextIdx = (currentTrackIdx + 1) % songsData[currentMood].length;
+      loadTrack(nextIdx);
+    });
+
+    function startTimer() {
+      pauseTimer();
+      timerInterval = window.setInterval(() => {
+        trackTimer += 1;
+        const mins = Math.floor(trackTimer / 60);
+        const secs = trackTimer % 60;
+        playerTimer.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
+
+        if (trackTimer >= 180) {
+          document.getElementById('btn-next').click();
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      if (timerInterval) window.clearInterval(timerInterval);
+    }
+
+    changeMood('favorite');
+  </script>
+</body>
+</html>
